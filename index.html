@@ -1,5 +1,6 @@
 <HTML>
     <HEAD>
+        <title>Keystone Question Generator - Algebra I</title>
         <link rel='stylesheet' type='text/css' href='layout.css'>
     </HEAD>
     
@@ -39,10 +40,9 @@
         <script src='js/questiongenerators/content30.js'></script>
         <script src='js/questiongenerators/content31.js'></script>
         <script src='js/questiongenerators/content32.js'></script>
-        <script src='completequestion.js'></script>
 
         <div class="dropdown">
-            <button class="anchorbtn">Select an Anchor</button>
+            <button class='buttons' id="anchorbtn">Select an Anchor</button>
             <div id="anchorDropdown" class="dropdown-content">
                 <a class='anchor1'><span id='strAnchor1'></span></a>
                 <a class='anchor2'><span id='strAnchor2'></span></a>
@@ -53,8 +53,8 @@
             <SPAN ID='strAnchor'></SPAN>
             <BR>
             <BR>
-            <button class="contentbtn">Select Content</button>
-            <div id="contentDropdown" class="dropdown-content2">
+            <button class='buttons' id="contentbtn">Select Content</button>
+            <div id="contentDropdown" class="dropdown-content">
                 <A CLASS='content0'><SPAN ID='strContent0'></SPAN></A>
                 <A CLASS='content1'><SPAN ID='strContent1'></SPAN></A>
                 <A CLASS='content2'><SPAN ID='strContent2'></SPAN></A>
@@ -89,17 +89,17 @@
                 <A CLASS='content31'><SPAN ID='strContent31'></SPAN></A>
                 <A CLASS='content32'><SPAN ID='strContent32'></SPAN></A>
             </div>
-
+            <SPAN ID='strContent'></SPAN>
         </div>
 
 
-        <p class='question'>What is <span id='num1'></span> + <span id='num2'></span>?</p>
+        <p id='question'>What is <span id='num1'></span> + <span id='num2'></span>?</p>
         <br>
-        <p class='answer1'>A. <span id='A'></span></p>
-        <p class='answer2'>B. <span id='B'></span></p>
-        <p class='answer3'>C. <span id='C'></span></p>
-        <p class='answer4'>D. <span id='D'></span></p>
+        <p class='answers' id='answer1'>A. <span id='A'></span></p>
+        <p class='answers' id='answer2'>B. <span id='B'></span></p>
+        <p class='answers' id='answer3'>C. <span id='C'></span></p>
+        <p class='answers' id='answer4'>D. <span id='D'></span></p>
         <BR>
-        <P CLASS='submit'>SUBMIT</P>
+        <P id='submit'>SUBMIT</P>
     </BODY>
 </HTML>

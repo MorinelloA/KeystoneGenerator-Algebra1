@@ -1,41 +1,29 @@
+//main function gets loaded once the document is ready
 $(document).ready(main);
 
-    /* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-/*function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}*/
-
-// Close the dropdown menu if the user clicks outside of it
+// Click events that close the dropdown menus if the user clicks outside of them
 window.onclick = function(event) {
-  if (!event.target.matches('.anchorbtn')) {
-
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
+  if (!event.target.matches('#anchorbtn')) {
+    var dropdown = document.getElementById('anchorDropdown');
+      if (dropdown.classList.contains('show')) {
+        dropdown.classList.remove('show');
       }
-    }
   }
 
-  if (!event.target.matches('.contentbtn')) {
-
-    var dropdowns = document.getElementsByClassName("dropdown-content2");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
+  if (!event.target.matches('#contentbtn')) {
+    var dropdown = document.getElementById('contentDropdown');
+      if (dropdown.classList.contains('show')) {
+        dropdown.classList.remove('show');
       }
-    }
   }
 }
 
+//function that will generate a question
 function generateQuestion(event){
+    //variable 0-32, matches the content number to call
     var questionToGenerate = event.data.contentNum;
 
+    //Question blank object
     var newQuestion = {
         isDeployed: false,
         anchor: null,
@@ -48,32 +36,33 @@ function generateQuestion(event){
         userAnswer: null
     };
 
-    var testString = 'generateContent' + questionToGenerate;
-    alert(testString);
-    if (typeof window[testString] === 'function') { 
-        newQuestion = window[testString](newQuestion);
+    //String used to call the proper generateContent method
+    var genQuestionString = 'generateContent' + questionToGenerate;
+    //Test to make sure the method being called exists
+    if (typeof window[genQuestionString] === 'function') { 
+        newQuestion = window[genQuestionString](newQuestion);
     }
     else {
         alert('This question has not yet been implemented');
     }
 
+    //Call displayQuestion() function
+    //Eventually this will have a newQuestion parameter
     displayQuestion();
 }
 
+//function displays the question, answers, and submit button to the user 
 function displayQuestion(){
-    
+    //Fade timer variables
+    //fadeInterval is time between items being faded
     var fadeInterval = 750;
+    //fadeTimer is length it takes to complete a fade
     var fadeTimer = 500;
-    var testObject = new CompleteQuestion();
-    testObject.standard = 'hey';
-    //alert(testObject.standard);
-    //alert(testObject.question);
 
-    var x = document.getElementById('word1');
-    
-    //x.innerHTML='hello';
-    $(x).html('hey');
-
+    //
+    //Sample question
+    //Will be replaced as content questions are developed
+    //
     var num1 = Math.floor(Math.random()*11);
     var n1 = document.getElementById('num1');
     $(n1).html(num1);
@@ -90,10 +79,15 @@ function displayQuestion(){
     if(incorrectAnswer3 === correctAnswer || incorrectAnswer3 === incorrectAnswer2){
         incorrectAnswer3 = num1 + num2 + 2;
     }
+    //
+    //End temp sample quesiton
+    //
 
+    //shuffle multiple choice answers to display to the user 
     var answers = [correctAnswer, incorrectAnswer1, incorrectAnswer2, incorrectAnswer3];
     shuffle(answers);
 
+    //Display all answers in their appropriate spans
     var a = document.getElementById('A');
     $(a).html(answers[0]); 
 
@@ -106,53 +100,68 @@ function displayQuestion(){
     var d = document.getElementById('D');
     $(d).html(answers[3]);     
 
+    //hide all question material to be faded
     hideAllQuestions();
 
-    $('.question').fadeIn(fadeTimer);
+    //fade in the question, answers, and submit button
+    $('#question').fadeIn(fadeTimer);
     setTimeout(function(){
-        $('.answer1').fadeIn(fadeTimer);
+        $('#answer1').fadeIn(fadeTimer);
     }, fadeInterval);
     setTimeout(function(){
-        $('.answer2').fadeIn(fadeTimer);
+        $('#answer2').fadeIn(fadeTimer);
     }, fadeInterval * 2);
     setTimeout(function(){
-        $('.answer3').fadeIn(fadeTimer);
+        $('#answer3').fadeIn(fadeTimer);
     }, fadeInterval * 3);
     setTimeout(function(){
-        $('.answer4').fadeIn(fadeTimer);
+        $('#answer4').fadeIn(fadeTimer);
     }, fadeInterval * 4);
 
+    //Declare a user answer
+    //Get their response in the click events below
     var userAnswer;
 
-    $('.answer1').on('click', function(){
+    //Click event for answer #1
+    //Makes it appear active and stores the answer as the user's choice
+    $('#answer1').on('click', function(){
         unselectAnswers()
         $(this).addClass('active');
         userAnswer = answers[0];
-        $('.submit').show();
+        $('#submit').show();
     });
 
-    $('.answer2').on('click', function(){
+    //Click event for answer #2
+    //Makes it appear active and stores the answer as the user's choice
+    $('#answer2').on('click', function(){
         unselectAnswers()
         $(this).addClass('active');
         userAnswer = answers[1];
-        $('.submit').show();
+        $('#submit').show();
     });
 
-    $('.answer3').on('click', function(){
+    //Click event for answer #3
+    //Makes it appear active and stores the answer as the user's choice
+    $('#answer3').on('click', function(){
         unselectAnswers()
         $(this).addClass('active');
         userAnswer = answers[2];
-        $('.submit').show();
+        $('#submit').show();
     });
 
-    $('.answer4').on('click', function(){
+    //Click event for answer #4
+    //Makes it appear active and stores the answer as the user's choice
+    $('#answer4').on('click', function(){
         unselectAnswers()
         $(this).addClass('active');
         userAnswer = answers[3];
-        $('.submit').show();
+        $('#submit').show();
     });
 
-    $('.submit').on('click', function(){
+    //Click event for the submit button
+    //Alert yser if they were correct or not
+    //Will changed as the site develops
+    $('#submit').on('click', function(){
         if(userAnswer === correctAnswer){
             alert('Correct');
         }
@@ -163,13 +172,24 @@ function displayQuestion(){
 }
 
 function main(){
+    //Hide code for the question, possible answers, and submit button
     hideAllQuestions();
+
+    //Algebra 1 Anchors
     var anchor1 = 'Operations with Real Numbers and Expressions';
     var anchor2 = 'Linear Equations';
     var anchor3 = 'Linear Inequalities';
     var anchor4 = 'Functions';
     var anchor5 = 'Coordinate Geometry';
 
+    //Set all the dropdown anchors items to the strings above
+    $(document.getElementById('strAnchor1')).html(anchor1);
+    $(document.getElementById('strAnchor2')).html(anchor2);
+    $(document.getElementById('strAnchor3')).html(anchor3);
+    $(document.getElementById('strAnchor4')).html(anchor4);
+    $(document.getElementById('strAnchor5')).html(anchor5);
+
+    //Algebra 1 Content
     var content = [];
     content[0] = 'Compare and/or order any real numbers';
     content[1] = 'Simplify square roots';
@@ -205,32 +225,33 @@ function main(){
     content[31] = 'Make predictions using the equations or graphs of best-fit lines of scatter plots';
     content[32] = 'Find probabilities for compound events and represent as a fraction, decimal, or percent';
 
-    $(document.getElementById('strAnchor1')).html(anchor1);
-    $(document.getElementById('strAnchor2')).html(anchor2);
-    $(document.getElementById('strAnchor3')).html(anchor3);
-    $(document.getElementById('strAnchor4')).html(anchor4);
-    $(document.getElementById('strAnchor5')).html(anchor5);
-
+    //Set all the dropdown content items to the strings above
     for(var i = 0; i <= 32; i++)
     {
         $(document.getElementById('strContent' + i)).html(content[i]);
     }
 
-    $('.anchorbtn').on('click', function(){
+
+    $('#anchorbtn').on('click', function(){
+        //alert('test');
         document.getElementById("anchorDropdown").classList.toggle("show");
+        //document.getElementById("anchorDropdown").classList.toggle("show");
+        //alert('test');
     });
 
-    $('.contentbtn').on('click', function(){
+    $('#contentbtn').on('click', function(){
         document.getElementById("contentDropdown").classList.toggle("show");
     });
 
-    $('.contentbtn').hide();
+    $('#contentbtn').hide();
     hideAllContent();
 
+    //anchor1 click event
+    //Will show all content items for anchor1
     $('.anchor1').on('click', function(){
         var anchorString = anchor1;
         $(document.getElementById('strAnchor')).html(anchorString);
-        $('.contentbtn').show();
+        $('#contentbtn').show();
         hideAllContent();
         for(var i = 0; i <= 7; i++)
         {
@@ -238,10 +259,12 @@ function main(){
         }
     });
 
+    //anchor2 click event
+    //Will show all content items for anchor2
     $('.anchor2').on('click', function(){
         var anchorString = anchor2;
         $(document.getElementById('strAnchor')).html(anchorString);
-        $('.contentbtn').show();
+        $('#contentbtn').show();
         hideAllContent();
         for(var i = 8; i <= 12; i++)
         {
@@ -249,10 +272,12 @@ function main(){
         }
     });
 
+    //anchor3 click event
+    //Will show all content items for anchor3
     $('.anchor3').on('click', function(){
         var anchorString = anchor3;
         $(document.getElementById('strAnchor')).html(anchorString);
-        $('.contentbtn').show();
+        $('#contentbtn').show();
         hideAllContent();
         for(var i = 13; i <= 22; i++)
         {
@@ -260,10 +285,12 @@ function main(){
         }
     });
 
+    //anchor4 click event
+    //Will show all content items for anchor4
     $('.anchor4').on('click', function(){
         var anchorString = anchor4;
         $(document.getElementById('strAnchor')).html(anchorString);
-        $('.contentbtn').show();
+        $('#contentbtn').show();
         hideAllContent();
         for(var i = 23; i <= 27; i++)
         {
@@ -271,10 +298,12 @@ function main(){
         }
     });
 
+    //anchor5 click event
+    //Will show all content items for anchor5
     $('.anchor5').on('click', function(){
         var anchorString = anchor5;
         $(document.getElementById('strAnchor')).html(anchorString);
-        $('.contentbtn').show();
+        $('#contentbtn').show();
         hideAllContent();
         for(var i = 28; i <= 32; i++)
         {
@@ -288,6 +317,7 @@ function main(){
     }
 }
 
+//Removes active attributes from all possible answers
 function unselectAnswers(){
     $('.answer1').removeClass('active');
     $('.answer2').removeClass('active');
@@ -295,6 +325,7 @@ function unselectAnswers(){
     $('.answer4').removeClass('active');
 }
 
+//Hides all content options from the content dropdown
 function hideAllContent(){
     for(var i = 0; i <= 32; i++)
     {
@@ -302,16 +333,18 @@ function hideAllContent(){
     }
 }
 
+//Hides the questions, answers, and submit button
+//Used to toggle fade effects
 function hideAllQuestions(){
-    //alert('inside hideAllQuestions');
-    $('.question').hide();
-    $('.answer1').hide();
-    $('.answer2').hide();
-    $('.answer3').hide();
-    $('.answer4').hide();
-    $('.submit').hide();
+    $('#question').hide();
+    $('#answer1').hide();
+    $('#answer2').hide();
+    $('#answer3').hide();
+    $('#answer4').hide();
+    $('#submit').hide();
 }
 
+//Randomly shuffles the elements in an array
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
