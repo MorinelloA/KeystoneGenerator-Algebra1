@@ -1,4 +1,7 @@
-function generateContent2(newQuestion){
+function generateContent2(){
+    //Question blank object
+    var newQuestion = new QuestionObj();
+    
     newQuestion.isDeployed = false;
     newQuestion.anchor = 'Operations with Real Numbers and Expressions';
     newQuestion.content = 'Find the Greatest Common Factor (GCF) and/or the Least Common Multiple (LCM) for sets of monomials';
