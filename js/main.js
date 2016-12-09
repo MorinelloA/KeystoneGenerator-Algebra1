@@ -92,14 +92,14 @@ function generateQuestion(event){
     }
 
     //Call displayQuestion() function
-    //Eventually this will have a newQuestion parameter
     if(newQuestion.isDeployed){
         //Needed to avoid multiple questions being checked
         $( "#submit" ).unbind( "click" );
+
         displayQuestion(newQuestion);
     }
     else
-        alert('This question has not yet been implemented')
+        alert('This question has not yet been implemented');
 }
 
 //function displays the question, answers, and submit button to the user 
