@@ -9,12 +9,12 @@ function generateContent2(){
     var num1, num2;
     //do while loop ensures that num1 is not a direct multiple of num2
     do{
-        //random # 50-950 (by 50)
-        num1 = (Math.floor(Math.random() * 19) + 1) * 50;
+        //random # 25-975 (by 50)
+        num1 = (Math.floor(Math.random() * 38) + 1) * 25;
 
-        //random # 1000-9000 (by 1000)
-        num2 = (Math.floor(Math.random() * 7) + 2) * 1000;
-    }while(num2 % num1 == 0);
+        //random # 500-9500 (by 500)
+        num2 = (Math.floor(Math.random() * 19) + 1) * 500;
+    }while(num2 % num1 === 0 || (LCM(num1, num2)) >= 100000);
 
     //exponents
     var x1, x2, y1, y2;
@@ -60,16 +60,30 @@ function generateContent2(){
     var gcf = GCF(num1, num2);
     var lcm = LCM(num1, num2);
 
-    //In the near future, implement randomness to question (add GCF) and possible answers
+    //Randomly determine whether this is a LCM or GCF question
+    //0-LCM, 1-GCF
+    var temp = y1 = Math.floor(Math.random() * 2);
+    var problem, probAbbr;
+    if(temp === 0)
+    {
+        problem = 'least common multiple (LCM)';
+        newQuestion.correctAnswer = lcm + 'x^' + gx + 'y^' + gy;
+        newQuestion.incorrect3 = gcf + 'x^' + lx + 'y^' + ly;
+    }
+    else
+    {
+        problem = 'greatest common factor (GCF)';
+        newQuestion.incorrect3 = lcm + 'x^' + gx + 'y^' + gy;
+        newQuestion.correctAnswer = gcf + 'x^' + lx + 'y^' + ly;
+    }
+
     newQuestion.question = 'Two monomials are shown below:<br><br>' +
         num1 + 'x^' + x1 + 'y^' + y1 + '<BR>' +
         num2 + 'x^' + x2 + 'y^' + y2 + '<BR><BR>' +
-        'What is the least common multiple (LCM) of the monomials?';
+        'What is the ' + problem + ' of the monomials?';
 
-    newQuestion.correctAnswer = lcm + 'x^' + gx + 'y^' + gy;
     newQuestion.incorrect1 = lcm + 'x^' + lx + 'y^' + ly;
-    newQuestion.incorrect2 = gcf + 'x^' + gx + 'y^' + gy;
-    newQuestion.incorrect3 = gcf + 'x^' + lx + 'y^' + ly;
+    newQuestion.incorrect2 = gcf + 'x^' + gx + 'y^' + gy; 
 
     return newQuestion;
 }
