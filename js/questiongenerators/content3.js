@@ -52,7 +52,10 @@ function generateContent3(){
             newQuestion.incorrect3 = (correctAnswerDouble * 10).toFixed(3);
         }
         
-        newQuestion.question = "Simplify:  " + temp1 + "(" + temp2 + "\u221A" + temp3 + ")^" + temp4;
+        //add exponent superscript to temp4
+        temp4 = '<sup>' + temp4 + '</sup>'; 
+
+        newQuestion.question = "Simplify:  " + temp1 + "(" + temp2 + "\u221A" + temp3 + ")" + temp4;
         
         if (!(newQuestion.correctAnswer === newQuestion.incorrect1 || newQuestion.correctAnswer === newQuestion.incorrect2 || newQuestion.correctAnswer === newQuestion.incorrect3 || newQuestion.incorrect1 === newQuestion.incorrect2 || newQuestion.incorrect1 === newQuestion.incorrect3 || newQuestion.incorrect2 === newQuestion.incorrect3))
         {
