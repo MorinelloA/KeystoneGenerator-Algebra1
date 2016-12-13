@@ -70,7 +70,7 @@ function generateContent6(){
     newQuestion.incorrect2 = "(x" + strIn2Num1 + ")(x" + strIn2Num2 + ")";
     newQuestion.incorrect3 = "(x" + strIn3Num1 + ")(x" + strIn3Num2 + ")";
     
-    newQuestion.question = "Factor: x^2" + strIn2Num1 + "x" + strIn2Num2;
+    newQuestion.question = "Factor: x<sup>2</sup>" + strIn2Num1 + "x" + strIn2Num2;
     
     return newQuestion;
 }

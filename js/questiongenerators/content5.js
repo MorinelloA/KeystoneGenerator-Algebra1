@@ -23,14 +23,14 @@ function generateContent5(){
         RX1 = Math.floor((Math.random() * 8) + 2);
         R = Math.floor((Math.random() * 8) + 2);
         
-        newQuestion.correctAnswer = (LX3 + RX3) + "x^3 + " + LX2 + "x^2 + " + (LX1 + RX1) + "x + " + (L + R);
+        newQuestion.correctAnswer = (LX3 + RX3) + "x<sup>3</sup> + " + LX2 + "x<sup>2</sup> + " + (LX1 + RX1) + "x + " + (L + R);
         
-        newQuestion.incorrect1 = (LX3 + RX3) + "x^6 + " + LX2 + "x^4 + " + (LX1 + RX1) + "x^2 + " + (L + R);
-        newQuestion.incorrect2 = (LX3 + RX3) + "x^3 + " + (LX2 + RX1) + "x^2 + " + (LX1 + R) + "x + " + L;
-        newQuestion.incorrect3 = (LX3 + RX3) + "x^6 + " + (LX2 + LX1 + RX1) + "x^2 + " + (L + R);
+        newQuestion.incorrect1 = (LX3 + RX3) + "x<sup>6</sup> + " + LX2 + "x<sup>4</sup> + " + (LX1 + RX1) + "x<sup>2</sup> + " + (L + R);
+        newQuestion.incorrect2 = (LX3 + RX3) + "x<sup>3</sup> + " + (LX2 + RX1) + "x<sup>2</sup> + " + (LX1 + R) + "x + " + L;
+        newQuestion.incorrect3 = (LX3 + RX3) + "x<sup>6</sup> + " + (LX2 + LX1 + RX1) + "x<sup>2</sup> + " + (L + R);
     }while(newQuestion.correctAnswer == newQuestion.incorrect2 || newQuestion.incorrect1 == newQuestion.incorrect3);
     
-    newQuestion.question = "Simplify: (" + LX3 + "x^3 + " + LX2 + "x^2 + " + LX1 + "x + " + L + ") + (" + RX3 + "x^3 + " + RX1 + "x + " + R + ")";
+    newQuestion.question = "Simplify: (" + LX3 + "x<sup>3</sup> + " + LX2 + "x<sup>2</sup> + " + LX1 + "x + " + L + ") + (" + RX3 + "x<sup>3</sup> + " + RX1 + "x + " + R + ")";
     
     return newQuestion;
 }
