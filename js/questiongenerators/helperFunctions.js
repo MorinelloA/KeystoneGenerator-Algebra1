@@ -1,3 +1,24 @@
+//Finds the LCM of 2 numbers
+function LCM(num1, num2){
+    var working1 = num1;
+    var working2 = num2;
+
+    while(working1 != working2)
+    {
+        if(working1 < working2)
+        {
+            working1 += num1;
+        }
+        else
+        {
+            working2 += num2;
+        }
+    }
+
+    return(working1);
+}
+
+//Generates a person's name randomly
 function generateName(){
     var temp = Math.floor(Math.random() * 25);
     var name;
