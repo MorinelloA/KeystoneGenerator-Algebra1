@@ -18,6 +18,19 @@ function LCM(num1, num2){
     return(working1);
 }
 
+//Finds GCF (GCD)
+function GCF(a,b) {
+    if (a < 0) a = -a;
+    if (b < 0) b = -b;
+    if (b > a) {var temp = a; a = b; b = temp;}
+    while (true) {
+        if (b == 0) return a;
+        a %= b;
+        if (a == 0) return b;
+        b %= a;
+    }
+}
+
 //Generates a person's name randomly
 function generateName(){
     var temp = Math.floor(Math.random() * 25);
