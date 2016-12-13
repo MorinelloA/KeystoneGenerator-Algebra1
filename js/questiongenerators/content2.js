@@ -57,33 +57,44 @@ function generateContent2(){
         gy = y1;
     }
 
+    //make exponents values actual exponents
+    x1 = '<sup>' + x1 + '</sup>';
+    x2 = '<sup>' + x2 + '</sup>';
+    y1 = '<sup>' + y1 + '</sup>';
+    y2 = '<sup>' + y2 + '</sup>';
+    ly = '<sup>' + ly + '</sup>';
+    gy = '<sup>' + gy + '</sup>';
+    lx = '<sup>' + lx + '</sup>';
+    gx = '<sup>' + gx + '</sup>';
+
+    //Find both GCF and LCM of num1 & num2
     var gcf = GCF(num1, num2);
     var lcm = LCM(num1, num2);
 
     //Randomly determine whether this is a LCM or GCF question
     //0-LCM, 1-GCF
-    var temp = y1 = Math.floor(Math.random() * 2);
+    var temp = Math.floor(Math.random() * 2);
     var problem, probAbbr;
     if(temp === 0)
     {
         problem = 'least common multiple (LCM)';
-        newQuestion.correctAnswer = lcm + 'x^' + gx + 'y^' + gy;
-        newQuestion.incorrect3 = gcf + 'x^' + lx + 'y^' + ly;
+        newQuestion.correctAnswer = lcm + 'x' + gx + 'y' + gy;
+        newQuestion.incorrect3 = gcf + 'x' + lx + 'y' + ly;
     }
     else
     {
         problem = 'greatest common factor (GCF)';
-        newQuestion.incorrect3 = lcm + 'x^' + gx + 'y^' + gy;
-        newQuestion.correctAnswer = gcf + 'x^' + lx + 'y^' + ly;
+        newQuestion.incorrect3 = lcm + 'x' + gx + 'y' + gy;
+        newQuestion.correctAnswer = gcf + 'x' + lx + 'y' + ly;
     }
 
     newQuestion.question = 'Two monomials are shown below:<br><br>' +
-        num1 + 'x^' + x1 + 'y^' + y1 + '<BR>' +
-        num2 + 'x^' + x2 + 'y^' + y2 + '<BR><BR>' +
+        num1 + 'x' + x1 + 'y' + y1 + '<BR>' +
+        num2 + 'x' + x2 + 'y' + y2 + '<BR><BR>' +
         'What is the ' + problem + ' of the monomials?';
 
-    newQuestion.incorrect1 = lcm + 'x^' + lx + 'y^' + ly;
-    newQuestion.incorrect2 = gcf + 'x^' + gx + 'y^' + gy; 
+    newQuestion.incorrect1 = lcm + 'x' + lx + 'y' + ly;
+    newQuestion.incorrect2 = gcf + 'x' + gx + 'y' + gy; 
 
     return newQuestion;
 }
