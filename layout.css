@@ -1,4 +1,14 @@
-body{
+hr {
+    border-color: black;
+    background-color: black;
+    color: black;
+}
+
+td {
+    text-align: center;
+}
+
+body {
     font-family: Helvetica;
     background-color: navajowhite;
 }
