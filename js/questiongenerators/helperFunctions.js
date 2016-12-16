@@ -1,3 +1,78 @@
+//Return a + or - depending on the number
+function posNegSign(num)
+{
+    if(num < 0)
+        return '-';
+    else
+        return '+';
+}
+
+//Return the proper number with a + or - in front
+function numPrefix(num)
+{
+    if(num < 0)
+        return '-' + Math.abs(num);
+    else
+        return '+' + Math.abs(num);
+}
+
+//Returns the proper value of the number infront of a variable
+//i.e. 1x becomes x, -1x becomes -x
+//Does not account for 0
+function varPrefix(num)
+{
+    if (num == 1)
+    {
+        return '+';
+    }
+    else if (num == -1)
+    {
+        return '-';
+    }
+    else if (num < 0)
+    {
+        return num;
+    }
+    else
+    {
+        return '+' + num;
+    }
+}
+
+//Same as above but should not include a plus sign when positive
+function varPrefixNoPlus(num)
+{
+    if (num == 1)
+    {
+        return '';
+    }
+    else if (num == -1)
+    {
+        return '-';
+    }
+    else
+    {
+        return num;
+    }
+}
+
+
+//Returns a random field property
+function fieldProperty(num){
+    switch(num){
+        case 0:
+            return 'Associative';
+        case 1:
+            return 'Commutative';
+        case 2:
+            return 'Identity';
+        case 3:
+            return 'Inverse';
+        case 4:
+            return 'Distributive';
+    }
+}
+
 //Finds the LCM of 2 numbers
 function LCM(num1, num2){
     var working1 = num1;
