@@ -6,6 +6,9 @@ function generateContent10(){
     newQuestion.anchor = 'Linear Equations';
     newQuestion.content = 'Interpret solutions to problems in the context of the problem situation (Linear equations)';
     
+    //This question has the framework of 1 question
+    //More frameworks should be implemented in the future
+
     var name = generateName();
 
     var product1, product2;
