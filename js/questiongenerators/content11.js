@@ -38,52 +38,109 @@ function generateContent11(){
     total1 = (a1 * x) + (b1 * y);
     total2 = (a2 * x) + (b2 * y);
 
-    newQuestion.question = 'Solve:<br><br>' +
+    var rand = Math.floor(Math.random() * 3);
+    //rand = 0 - solve for x
+    //rand = 1 - solve for y
+    //rand = 2 - solve for x & y
+    
+    if(rand === 0) { //Solve for x
+        newQuestion.question = 'Solve for x:<br><br>' +
         varPrefixNoPlus(a1) + 'x' + varPrefix(b1) + 'y=' + total1 + '<br>' +
         varPrefixNoPlus(a2) + 'x' + varPrefix(b2) + 'y=' + total2;
-    
-    newQuestion.correctAnswer = 'x = ' + x + ', y = ' + y;
 
-    //Gives a variety of possible incorrect responses
-    var possibleChoices = [];
+        newQuestion.correctAnswer = 'x = ' + x;
+        
+        //Incorrect x's
+        var in1, in2, in3;
 
-    //possibleChoices.push('No possible solution');
-    if(x !== y)
-    {
-        possibleChoices.push('x = ' + y + ', y = ' + x);
-    }
-
-    possibleChoices.push('x = ' + (x * -1) + ', y = ' + y);
-    possibleChoices.push('x = ' + x + ', y = ' + (y * -1));
-    possibleChoices.push('x = ' + (x - 1) + ', y = ' + y);
-    possibleChoices.push('x = ' + (x + 1) + ', y = ' + y);
-    possibleChoices.push('x = ' + x + ', y = ' + (y - 1));
-    possibleChoices.push('x = ' + x + ', y = ' + (y + 1));
-
-    //Add complete random possibilities
-    var xx, yy;
-    for(var i = 0; i < 7; i++)
-    {
+        //Do While loops to ensure no repeat answers
         do{
-            xx = Math.floor(Math.random() * 20) - 5;
-            yy = Math.floor(Math.random() * 20) - 5;
-        }while(xx === x && yy === y); //Eliminate the possibility of a correct answer
-        possibleChoices.push('x = ' + xx + ', y = ' + yy);
+            in1 = Math.floor(Math.random() * 20) - 5;
+        }while(in1 === x);
+        do{
+            in2 = Math.floor(Math.random() * 20) - 5;
+        }while(in2 === x || in2 === in1);
+        do{
+            in3 = Math.floor(Math.random() * 20) - 5;
+        }while(in3 === x || in3 === in1 || in3 === in2);
+
+        newQuestion.incorrect1 = 'x = ' + in1;
+        newQuestion.incorrect2 = 'x = ' + in2;
+        newQuestion.incorrect3 = 'x = ' + in3;
     }
+    else if(rand === 1) { //Solve for y
+        newQuestion.question = 'Solve for y:<br><br>' +
+        varPrefixNoPlus(a1) + 'x' + varPrefix(b1) + 'y=' + total1 + '<br>' +
+        varPrefixNoPlus(a2) + 'x' + varPrefix(b2) + 'y=' + total2;
 
-    //Make sure no two incorrect answers equal one another
-    //Due to random inclusions, this is entirely possible
-    var in1, in2, in3;
-    do{
-        in1 = Math.floor(Math.random() * possibleChoices.length);
-        in2 = Math.floor(Math.random() * possibleChoices.length);
-        in3 = Math.floor(Math.random() * possibleChoices.length);
-    }while(in1 === in2 || in1 === in3 || in2 === in3);
+        newQuestion.correctAnswer = 'y = ' + y;
+        
+        //Incorrect x's
+        var in1, in2, in3;
 
-    //Set the incorrect answers
-    newQuestion.incorrect1 = possibleChoices[in1];
-    newQuestion.incorrect2 = possibleChoices[in2];
-    newQuestion.incorrect3 = possibleChoices[in3];
+        //Do While loops to ensure no repeat answers
+        do{
+            in1 = Math.floor(Math.random() * 20) - 5;
+        }while(in1 === y);
+        do{
+            in2 = Math.floor(Math.random() * 20) - 5;
+        }while(in2 === y || in2 === in1);
+        do{
+            in3 = Math.floor(Math.random() * 20) - 5;
+        }while(in3 === y || in3 === in1 || in3 === in2);
+
+        newQuestion.incorrect1 = 'y = ' + in1;
+        newQuestion.incorrect2 = 'y = ' + in2;
+        newQuestion.incorrect3 = 'y = ' + in3;
+    }
+    else { //Solve for x & y
+        newQuestion.question = 'Solve:<br><br>' +
+            varPrefixNoPlus(a1) + 'x' + varPrefix(b1) + 'y=' + total1 + '<br>' +
+            varPrefixNoPlus(a2) + 'x' + varPrefix(b2) + 'y=' + total2;
+        
+        newQuestion.correctAnswer = 'x = ' + x + ', y = ' + y;
+
+        //Gives a variety of possible incorrect responses
+        var possibleChoices = [];
+
+        //possibleChoices.push('No possible solution');
+        if(x !== y)
+        {
+            possibleChoices.push('x = ' + y + ', y = ' + x);
+        }
+
+        possibleChoices.push('x = ' + (x * -1) + ', y = ' + y);
+        possibleChoices.push('x = ' + x + ', y = ' + (y * -1));
+        possibleChoices.push('x = ' + (x - 1) + ', y = ' + y);
+        possibleChoices.push('x = ' + (x + 1) + ', y = ' + y);
+        possibleChoices.push('x = ' + x + ', y = ' + (y - 1));
+        possibleChoices.push('x = ' + x + ', y = ' + (y + 1));
+
+        //Add complete random possibilities
+        var xx, yy;
+        for(var i = 0; i < 7; i++)
+        {
+            do{
+                xx = Math.floor(Math.random() * 20) - 5;
+                yy = Math.floor(Math.random() * 20) - 5;
+            }while(xx === x && yy === y); //Eliminate the possibility of a correct answer
+            possibleChoices.push('x = ' + xx + ', y = ' + yy);
+        }
+
+        //Make sure no two incorrect answers equal one another
+        //Due to random inclusions, this is entirely possible
+        var in1, in2, in3;
+        do{
+            in1 = Math.floor(Math.random() * possibleChoices.length);
+            in2 = Math.floor(Math.random() * possibleChoices.length);
+            in3 = Math.floor(Math.random() * possibleChoices.length);
+        }while(in1 === in2 || in1 === in3 || in2 === in3);
+
+        //Set the incorrect answers
+        newQuestion.incorrect1 = possibleChoices[in1];
+        newQuestion.incorrect2 = possibleChoices[in2];
+        newQuestion.incorrect3 = possibleChoices[in3];
+    }
 
     return newQuestion;
 }
