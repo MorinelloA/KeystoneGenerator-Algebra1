@@ -1,3 +1,8 @@
+//Format number with commas
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 //Return a + or - depending on the number
 function posNegSign(num)
 {
